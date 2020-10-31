@@ -1,0 +1,14 @@
+def main():
+    word=get_word()
+    guess_word(word)
+    while input("press enter to play again or 'e' to exit"):
+        word=get_word()
+        guess_word(word)
+
+                  
+                  
+                  
+if __name__=="__main__":
+    main()
+                  
+        
