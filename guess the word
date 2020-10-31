@@ -1,0 +1,50 @@
+def guess_word(word):
+    word_letters='_'*len(word)
+    guessed=False
+    guessed_words=[]
+    guessed_letters=[]
+    tries=6
+    print("WELCOME TO HANGMAN")
+    print(word_letters)
+    print("\n")
+    while not guessed and tries>0:
+        guess=input("please guess a letter or word: ").upper()
+        if len(guess)==1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("already guessed the letter")
+            elif guess not in word:
+                print("sorry, wrong input")
+                guessed_letters.append(guess)
+                tries-=1
+            else:
+                print("correct input", guess , "is in the word")
+                guessed_letters.append(guess)
+                word_as_list=list(word_letters)
+                indices=[i for i, letter in enumerate(word) if letter==guess]
+                for index in indices:
+                    word_as_list[index]=guess
+                word_letters="".join(word_as_list)
+                if '_' not in word_letters:
+                    guessed=True
+        elif len(guess)==len(word) and guess.isalpha():
+            if guess in guessed_words:
+                print(f"already guessed this word: {guess}")
+            elif guess not in word:
+                print(f"sorry, the word {guess} is wrong")
+                tries-=1
+                guessed_words.append(guess)
+            else:
+                print(f"{guess} is the correct word")
+                guessed=True
+                word_letters=word
+        else:
+            print("inappropriate input")
+        print(display_hangman(tries))
+        print(word_letters)
+        print("\n")
+        
+        
+    if guessed:
+        print(f"congrats, you won {word} is the word")
+    else:
+        print(f"sorry you ran out of tries, {word} was the word")
