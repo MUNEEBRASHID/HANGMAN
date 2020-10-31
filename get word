@@ -1,0 +1,5 @@
+import random
+
+def get_word():
+    word=random.choice(wordlist)
+    return word.upper()
